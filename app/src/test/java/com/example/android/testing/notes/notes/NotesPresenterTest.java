@@ -16,7 +16,6 @@
 
 package com.example.android.testing.notes.notes;
 
-import static junit.framework.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 
@@ -30,7 +29,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -70,20 +71,19 @@ public class NotesPresenterTest {
 
   @Test
   public void loadNotesFromRepositoryAndLoadIntoView() {
-    fail("Implement in step 6");
-//        // Given an initialized NotesPresenter with initialized notes
-//        // When loading of Notes is requested
-//        mNotesPresenter.loadNotes(true);
-//
-//        // Callback is captured and invoked with stubbed notes
-//        verify(mNotesRepository).getNotes(mLoadNotesCallbackCaptor.capture());
-//        mLoadNotesCallbackCaptor.getValue().onNotesLoaded(NOTES);
-//
-//        // Then progress indicator is hidden and notes are shown in UI
-//        InOrder inOrder = Mockito.inOrder(mNotesView);
-//        inOrder.verify(mNotesView).setProgressIndicator(true);
-//        inOrder.verify(mNotesView).setProgressIndicator(false);
-//        verify(mNotesView).showNotes(NOTES);
+    // Given an initialized NotesPresenter with initialized notes
+    // When loading of Notes is requested
+    mNotesPresenter.loadNotes(true);
+
+    // Callback is captured and invoked with stubbed notes
+    verify(mNotesRepository).getNotes(mLoadNotesCallbackCaptor.capture());
+    mLoadNotesCallbackCaptor.getValue().onNotesLoaded(NOTES);
+
+    // Then progress indicator is hidden and notes are shown in UI
+    InOrder inOrder = Mockito.inOrder(mNotesView);
+    inOrder.verify(mNotesView).setProgressIndicator(true);
+    inOrder.verify(mNotesView).setProgressIndicator(false);
+    verify(mNotesView).showNotes(NOTES);
   }
 
   @Test

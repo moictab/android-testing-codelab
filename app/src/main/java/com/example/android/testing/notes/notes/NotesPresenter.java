@@ -16,34 +16,29 @@
 
 package com.example.android.testing.notes.notes;
 
-import com.example.android.testing.notes.data.Note;
-import com.example.android.testing.notes.data.NotesRepository;
-import com.example.android.testing.notes.util.EspressoIdlingResource;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import android.support.annotation.NonNull;
-
-import java.util.List;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.example.android.testing.notes.data.Note;
+import com.example.android.testing.notes.data.NotesRepository;
 
 
 /**
- * Listens to user actions from the UI ({@link NotesFragment}), retrieves the data and updates the
- * UI as required.
+ * Listens to user actions from the UI ({@link NotesFragment}), retrieves the data and updates the UI as required.
  */
 public class NotesPresenter implements NotesContract.UserActionsListener {
 
-    private final NotesRepository mNotesRepository;
-    private final NotesContract.View mNotesView;
+  private final NotesRepository mNotesRepository;
+  private final NotesContract.View mNotesView;
 
-    public NotesPresenter(
-            @NonNull NotesRepository notesRepository, @NonNull NotesContract.View notesView) {
-        mNotesRepository = checkNotNull(notesRepository, "notesRepository cannot be null");
-        mNotesView = checkNotNull(notesView, "notesView cannot be null!");
-    }
+  public NotesPresenter(
+      @NonNull NotesRepository notesRepository, @NonNull NotesContract.View notesView) {
+    mNotesRepository = checkNotNull(notesRepository, "notesRepository cannot be null");
+    mNotesView = checkNotNull(notesView, "notesView cannot be null!");
+  }
 
-    @Override
-    public void loadNotes(boolean forceUpdate) {
+  @Override
+  public void loadNotes(boolean forceUpdate) {
 //        mNotesView.setProgressIndicator(true);
 //        if (forceUpdate) {
 //            mNotesRepository.refreshData();
@@ -61,17 +56,17 @@ public class NotesPresenter implements NotesContract.UserActionsListener {
 //                mNotesView.showNotes(notes);
 //            }
 //        });
-    }
+  }
 
-    @Override
-    public void addNewNote() {
-//        mNotesView.showAddNote();
-    }
+  @Override
+  public void addNewNote() {
+    this.mNotesView.showAddNote();
+  }
 
-    @Override
-    public void openNoteDetails(@NonNull Note requestedNote) {
-        checkNotNull(requestedNote, "requestedNote cannot be null!");
-        mNotesView.showNoteDetailUi(requestedNote.getId());
-    }
+  @Override
+  public void openNoteDetails(@NonNull Note requestedNote) {
+    checkNotNull(requestedNote, "requestedNote cannot be null!");
+    mNotesView.showNoteDetailUi(requestedNote.getId());
+  }
 
 }
