@@ -29,9 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InOrder;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -80,9 +78,7 @@ public class NotesPresenterTest {
     mLoadNotesCallbackCaptor.getValue().onNotesLoaded(NOTES);
 
     // Then progress indicator is hidden and notes are shown in UI
-    InOrder inOrder = Mockito.inOrder(mNotesView);
-    inOrder.verify(mNotesView).setProgressIndicator(true);
-    inOrder.verify(mNotesView).setProgressIndicator(false);
+    verify(mNotesView).setProgressIndicator(false);
     verify(mNotesView).showNotes(NOTES);
   }
 
